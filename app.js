@@ -13,8 +13,8 @@ window.onload = function(){
         generateCss(randColors());
         generateFirstRow();
         setInterval(function(){
-                generateRow();
-                },500);
+            generateRow();
+        },500);
     }
 
     function generateFirstRow(){
