@@ -77,7 +77,7 @@ window.onload = function(){
         var color2;
         do {
             color2 = colors.cells[getRandInt(colors.cells.length)];
-        } while(color2 != color1);
+        } while(color2 == color1);
         return {'background':background, 'color1':color1, 'color2':color2};
     }
 
