@@ -23,7 +23,7 @@ window.onload = function(){
             var cell = document.createElement('div');
             if (Math.random() >= 0.5){
                 cell.className = 'cell active';
-n            } else {
+            } else {
                 cell.className = 'cell';
             }
             row.appendChild(cell);
@@ -86,13 +86,13 @@ n            } else {
     }
 
     function generateCss(colors){
-        var cssString = "<style>\
-            * {margin: 0;padding: 0;}\
+        var css = document.createElement('style');
+        var cssString = "* {margin: 0;padding: 0;}\
             #mainWrapper {width: 100vw;height: 100vh;background-color:#"+ colors['background'] + ";}\
             #mainWrapper div {height: 2vw;}\
             .cell {width: 2vw;background-color:#"+ colors['color1'] + ";display: inline-block;}\
-            .active {background-color:#"+ colors['color2'] +" !important;}\
-            </style>";
-        document.getElementsByTagName('head')[0].appendChild(cssString);
+            .active {background-color:#"+ colors['color2'] +" !important;}";
+        css.innerHTML = cssString;
+        document.getElementsByTagName('head')[0].appendChild(css);
     }
 }
