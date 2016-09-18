@@ -87,11 +87,12 @@ function getRandInt(max){
 }
 
 function generateCss(colors){
-	console.log(colors);
-    var cssString = "* {margin: 0;padding: 0;}\
+    var cssString = "<style>\
+        * {margin: 0;padding: 0;}\
         #mainWrapper {width: 100vw;height: 100vh;background-color:#"+ colors['background'] + ";}\
         #mainWrapper div {height: 2vw;}\
         .cell {width: 2vw;background-color:#"+ colors['color1'] + ";display: inline-block;}\
-        .active {background-color:#"+ colors['color2'] +" !important;}";
-    console.log(cssString);
+        .active {background-color:#"+ colors['color2'] +" !important;}\
+        </style>";
+    document.write(cssString);
 }
