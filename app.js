@@ -23,7 +23,7 @@ window.onload = function(){
             var cell = document.createElement('div');
             if (Math.random() >= 0.5){
                 cell.className = 'cell active';
-            } else {
+n            } else {
                 cell.className = 'cell';
             }
             row.appendChild(cell);
@@ -93,6 +93,6 @@ window.onload = function(){
             .cell {width: 2vw;background-color:#"+ colors['color1'] + ";display: inline-block;}\
             .active {background-color:#"+ colors['color2'] +" !important;}\
             </style>";
-        document.write(cssString);
+        document.getElementsByTagName('head')[0].appendChild(cssString);
     }
 }
