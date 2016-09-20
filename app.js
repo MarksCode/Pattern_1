@@ -1,32 +1,61 @@
 window.onload = function(){
     var numColumns = 50;
+    var count = 0;
     var lastRowCreated;
-    var rules =[[1,1,1],[0,0,0],[1,0,0]];
+    var allRules = {
+        '190': {
+            'single': true,
+            'rules': [[1,1,0],[0,0,0]]
+        },
+        '110': {
+            'single': false,
+            'rules': [[1,1,1],[0,0,0],[1,0,0]]
+        }
+    };
+    var keys = Object.keys(obj);
+    var timer;
     var colors = {
-    backgrounds: ['404040','585858','191919','2b2b2b','7e8f7c'],
-             cells: ['6dbdd6','b71427','ffe658','118c4e','ff9009','df3d82','7d1935','f5f3ee','fff056']
+        backgrounds: ['404040','585858','191919','2b2b2b','7e8f7c'],
+        cells: ['6dbdd6','b71427','ffe658','118c4e','ff9009','df3d82','7d1935','f5f3ee','fff056']
     };
 
     runIteration();
 
     function runIteration(){
+        chosenRule = allRules[keys[keys.length * Math.random() << 0]];
+        rules = chosenRule['rules'];
         generateCss(randColors());
-        generateFirstRow();
-        setInterval(function(){
-            generateRow();
+        generateFirstRow(chosenRule['single']);
+        timer = setInterval(function(){
+            if (count < 25){
+                count++;
+                generateRow();
+            } else {
+                reset();
+            }
         },500);
     }
 
-    function generateFirstRow(){
+    function generateFirstRow(single){
         var row = document.createElement('div');
         for (var i=0; i<numColumns; i++){
-            var cell = document.createElement('div');
-            if (Math.random() >= 0.5){
-                cell.className = 'cell active';
+            if (single){
+                var cell = document.createElement('div');
+                if (i == Math.floor(numColumns/2)){
+                    cell.className = 'cell active';
+                } else {
+                    cell.className = 'cell';
+                }
+                row.appendChild(cell);
             } else {
-                cell.className = 'cell';
+                var cell = document.createElement('div');
+                if (Math.random() >= 0.5){
+                    cell.className = 'cell active';
+                } else {
+                    cell.className = 'cell';
+                }
+                row.appendChild(cell);
             }
-            row.appendChild(cell);
         }
         lastRowCreated = row;
         document.getElementById('mainWrapper').appendChild(row);
@@ -94,5 +123,12 @@ window.onload = function(){
             .active {background-color:#"+ colors['color2'] +" !important;}";
         css.innerHTML = cssString;
         document.getElementsByTagName('head')[0].appendChild(css);
+    }
+
+    function reset(){
+        clearInterval(timer);
+        count = 0;
+        document.getElementById('mainWrapper').innerHTML = '';
+        runIteration();
     }
 }
